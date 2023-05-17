@@ -13,6 +13,3 @@ void loop() {
   beacon.scanForBeacons();
   delay(5000);
 }
-
-
-teste

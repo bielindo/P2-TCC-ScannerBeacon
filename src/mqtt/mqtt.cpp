@@ -6,11 +6,15 @@ WiFiClient wifiClient;
 PubSubClient mqttClient(RASP_BROKER_IP, PORTA, wifiClient);
 
 void Mqtt::wifiConnect() {
+  if (WiFi.status() == WL_CONNECTED) {
+    return;
+  }
   WiFi.begin(SSIDRASP, PASS);
-  Serial.print("Conectando à rede WiFi");
-  while (WiFi.status() != WL_CONNECTED) {
-    Serial.print(".");
-    delay(1000);
+  Serial.println("Conectando à rede WiFi");
+  if (WiFi.waitForConnectResult() != WL_CONNECTED) {
+    Serial.println("Não conectado ao WiFi");
+    delay(2000);
+    ESP.restart();
   }
   Serial.println("");
   Serial.println("Conectado à rede WiFi");
