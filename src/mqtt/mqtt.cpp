@@ -30,7 +30,10 @@ void Mqtt::mqtt(String nome_beacon, int frequencia) {
   }
 
   if (mqttClient.connected()) {
-    String topico = nome_beacon +","+ frequencia;
-    mqttClient.publish(nome_servidor, topico.c_str());
+    String mensagem = nome_beacon +","+ frequencia;
+    if (frequencia!=0){
+      mqttClient.publish(nome_servidor, mensagem.c_str());
+    }
+    
   }
 }

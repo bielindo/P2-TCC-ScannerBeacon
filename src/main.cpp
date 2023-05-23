@@ -11,5 +11,5 @@ void setup() {
 void loop() {
   Serial.println("Varrendo beacons...");
   beacon.scanForBeacons();
-  delay(5000);
+  delay(100);
 }
