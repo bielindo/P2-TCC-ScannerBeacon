@@ -11,12 +11,11 @@
 class Beacon{
 
 public:
-    int scanTime = 10;
+    int scanTime = 3;
     BLEScan *pBLEScan;
 
     void scanForBeacons();
         
 };
-
 
 #endif
