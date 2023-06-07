@@ -34,8 +34,10 @@ void Mqtt::mqtt(String beacon[], int tamanho) {
     for (int i = 0; i < tamanho; i++) {
         mensagem = mensagem + beacon[i];
     }
-
-    mqttClient.publish(nome_servidor, mensagem.c_str());
+    if (mensagem != ""){
+        mqttClient.publish(nome_servidor, mensagem.c_str());
+    }
+    
     //Serial.println(mensagem);
   }
 }

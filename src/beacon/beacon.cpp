@@ -14,20 +14,23 @@ public:
     
     void onResult(BLEAdvertisedDevice advertisedDevice) {
         if (advertisedDevice.haveName()) {
-            Serial.println("-----------------------");
-            Serial.print("Nome do dispositivo: ");
-            Serial.println(advertisedDevice.getName().c_str());
-            
-            std::string nome_beacon = advertisedDevice.getName().c_str();
-            
-            Serial.print("RSSI: ");
-            Serial.println(advertisedDevice.getRSSI());
-            
-            int frequencia = advertisedDevice.getRSSI();
-            
-            std::string beaconCompleto = nome_beacon + "," + std::to_string(frequencia) + ";";
-            
-            beacons.push_back(beaconCompleto); // Adiciona o beacon ao vetor
+            if (!strcmp(advertisedDevice.getName().c_str(), "SegundoBeacon")){
+                Serial.println("-----------------------");
+                Serial.print("Nome do dispositivo: ");
+                Serial.println(advertisedDevice.getName().c_str());
+                
+                std::string nome_beacon = advertisedDevice.getName().c_str();
+                
+                Serial.print("RSSI: ");
+                Serial.println(advertisedDevice.getRSSI());
+                
+                int frequencia = advertisedDevice.getRSSI();
+
+                if (frequencia<0 and frequencia>-80){
+                    std::string beaconCompleto = nome_beacon + "," + std::to_string(frequencia) + ";";
+                    beacons.push_back(beaconCompleto); // Adiciona o beacon ao vetor
+                } 
+            } 
         }
     }
 };
