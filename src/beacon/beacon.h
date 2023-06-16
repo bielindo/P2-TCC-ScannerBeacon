@@ -7,15 +7,17 @@
 #include <BLEAdvertisedDevice.h>
 #include <BLEBeacon.h>
 
+extern std::map<std::string, std::vector<int>> devices;
 
 class Beacon{
 
 public:
     int scanTime = 3;
     BLEScan *pBLEScan;
-
-    void scanForBeacons();
-        
+    void calculateAndPrintAverages();
+    void scanForBeacons();    
 };
+
+
 
 #endif

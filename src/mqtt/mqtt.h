@@ -26,7 +26,7 @@ public:
 
     //Funcao para conectar o Wi-fi no esp
     void wifiConnect();
-    void mqtt(String beacon[], int tamanho);
+    void mqtt(String mensagem);
 };
 
 #endif

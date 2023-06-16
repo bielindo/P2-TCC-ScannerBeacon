@@ -1,64 +1,91 @@
-
 #include "beacon.h"
 #include "./estrutura/estrutura.h"
-#include <iostream>
-#include <string>
 #include "./mqtt/mqtt.h"
 
 
 Mqtt mqtt;
 
+std::map<std::string, std::vector<int>> devices;
+
+
+
 class MyAdvertisedDeviceCallbacks : public BLEAdvertisedDeviceCallbacks {
-public:
-    std::vector<std::string> beacons; // Vetor de strings para armazenar os beacons
-    
-    void onResult(BLEAdvertisedDevice advertisedDevice) {
-        if (advertisedDevice.haveName()) {
-            if (!strcmp(advertisedDevice.getName().c_str(), "SegundoBeacon")){
-                Serial.println("-----------------------");
-                Serial.print("Nome do dispositivo: ");
-                Serial.println(advertisedDevice.getName().c_str());
-                
-                std::string nome_beacon = advertisedDevice.getName().c_str();
-                
-                Serial.print("RSSI: ");
-                Serial.println(advertisedDevice.getRSSI());
-                
-                int frequencia = advertisedDevice.getRSSI();
+  void onResult(BLEAdvertisedDevice advertisedDevice) {
+    std::string deviceName = advertisedDevice.getName();
 
-                if (frequencia<0 and frequencia>-80){
-                    std::string beaconCompleto = nome_beacon + "," + std::to_string(frequencia) + ";";
-                    beacons.push_back(beaconCompleto); // Adiciona o beacon ao vetor
-                } 
-            } 
-        }
+    // Verifica se o dispositivo possui um nome
+    if (!deviceName.empty()) {
+      // Verifica se o dispositivo já foi encontrado anteriormente
+      if (devices.find(deviceName) == devices.end()) {
+        devices[deviceName] = std::vector<int>();
+      }
+
+      // Obtém a frequência RSSI do dispositivo
+      int rssi = advertisedDevice.getRSSI();
+
+      // Armazena a frequência RSSI no vetor do dispositivo correspondente
+      devices[deviceName].push_back(rssi);
+
+      Serial.print("Device found: ");
+      Serial.print(deviceName.c_str());
+      Serial.print(" | RSSI: ");
+      Serial.println(rssi);
     }
+  }
 };
-
 
 void Beacon::scanForBeacons() {
     BLEDevice::init(nome_servidor);
+
     pBLEScan = BLEDevice::getScan();
     auto callback = new MyAdvertisedDeviceCallbacks();
     pBLEScan->setAdvertisedDeviceCallbacks(callback);
     pBLEScan->setActiveScan(true);
     pBLEScan->setInterval(100);
     pBLEScan->setWindow(99);
-    Serial.println("DEMORA?");
-    BLEScanResults foundDevices = pBLEScan->start(scanTime, false);
-  
-    pBLEScan->clearResults();
-    
+
+    for (int i = 0; i < 10; i++) {
+        BLEScanResults scanResults = pBLEScan->start(3, false);
+        delay(1000);  // Aguarda 1 segundo antes de iniciar o próximo escaneamento
+    }
     mqtt.wifiConnect();
-  
-    size_t numBeacons = callback->beacons.size();
-    String* beaconArray = new String[numBeacons];
-    for (size_t i = 0; i < numBeacons; i++) {
-      beaconArray[i] = callback->beacons[i].c_str();
+    calculateAndPrintAverages();
+    devices.clear();
+}
+
+void Beacon::calculateAndPrintAverages() {
+  std::map<std::string, float> averages;
+  String mensagem;
+
+  for (const auto& device : devices) {
+    std::string deviceName = device.first;
+    const std::vector<int>& frequencies = device.second;
+
+    int sum = 0;
+    for (int frequency : frequencies) {
+      sum += frequency;
     }
 
-    mqtt.mqtt(beaconArray, numBeacons);
+    float average = static_cast<float>(sum) / frequencies.size();
+    averages[deviceName] = average;
 
-    delete[] beaconArray;
+    Serial.print("Device: ");
+    Serial.print(deviceName.c_str());
+    Serial.print(" | Average RSSI: ");
+    Serial.println(average);
+
+    mensagem += String(deviceName.c_str()) + ", " + String(average) + "; ";
+
+    Serial.print("Frequencies: ");
+    for (int frequency : frequencies) {
+      Serial.print(frequency);
+      Serial.print(" ");
+    }
+    Serial.println();
+  }
+
+  Serial.print("MENSAGEM: ");
+  Serial.println(mensagem);
+  mqtt.mqtt(mensagem);
 }
 

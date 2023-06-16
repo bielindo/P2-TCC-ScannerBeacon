@@ -22,7 +22,7 @@ void Mqtt::wifiConnect() {
 }
 
 
-void Mqtt::mqtt(String beacon[], int tamanho) {
+void Mqtt::mqtt(String mensagem) {
   if (mqttClient.connect(nome_servidor, MQTT_USER, MQTT_SENHA)) {
     Serial.println("Conectado ao broker MQTT");
   } else {
@@ -30,10 +30,6 @@ void Mqtt::mqtt(String beacon[], int tamanho) {
   }
 
   if (mqttClient.connected()) {
-    String mensagem;
-    for (int i = 0; i < tamanho; i++) {
-        mensagem = mensagem + beacon[i];
-    }
     if (mensagem != ""){
         mqttClient.publish(nome_servidor, mensagem.c_str());
     }
