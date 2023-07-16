@@ -1,6 +1,6 @@
-# Beacon Scanner
+# P2 - Projeto TCC - Beacon Scanner
 
-Este é um aplicativo para escanear e coletar informações de beacons Bluetooth Low Energy (BLE) próximos usando o módulo BLE do ESP32.
+Este é o repositório do projeto de Trabalho de Conclusão de Curso (TCC) intitulado "Scanner Beacon". O objetivo deste projeto é escanear e coletar informações de beacons Bluetooth Low Energy (BLE) próximos usando o módulo BLE do ESP32.
 
 ## Instalação
 
