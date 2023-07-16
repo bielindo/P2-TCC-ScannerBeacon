@@ -45,3 +45,7 @@ Você pode configurar o tempo de duração do escaneamento e outras opções no 
 
 - [PubSubClient](https://github.com/knolleary/pubsubclient): Biblioteca para comunicação MQTT.
 
+## Licença
+
+Este projeto está sob a licença MIT. Consulte o arquivo LICENSE para obter mais detalhes.
+
