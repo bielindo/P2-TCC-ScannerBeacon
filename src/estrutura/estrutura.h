@@ -2,7 +2,7 @@
 #define ESTRUTURA_H
 
 
-#define nome_servidor "dispositivo4"
+#define nome_servidor "dispositivo1"
 
 
 #endif
