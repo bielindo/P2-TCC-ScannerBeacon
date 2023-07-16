@@ -1,13 +1,11 @@
 # Beacon Scanner
 
-```markdown
 Este é um aplicativo para escanear e coletar informações de beacons Bluetooth Low Energy (BLE) próximos usando o módulo BLE do Arduino.
 
 ## Instalação
 
 1. Clone este repositório para o seu ambiente de desenvolvimento local.
 
-```bash
     git clone https://github.com/bielindoo/beacon-scanner.git
     cd beacon-scanner
 
