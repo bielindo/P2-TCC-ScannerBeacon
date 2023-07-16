@@ -1,4 +1,4 @@
-# P2 - Projeto TCC - Beacon Scanner
+# P2 - Projeto TCC (Sistema de monitoramento e rastreamento de objetos indoor) - Beacon Scanner
 
 Este é o segundo repositório do projeto de Trabalho de Conclusão de Curso (TCC) sobre localização indoor, intitulado "Scanner Beacon". O objetivo deste projeto é escanear e coletar informações de beacons Bluetooth Low Energy (BLE) próximos usando o módulo BLE do ESP32.
 
