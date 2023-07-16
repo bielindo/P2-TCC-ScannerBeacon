@@ -6,14 +6,15 @@ Este é um aplicativo para escanear e coletar informações de beacons Bluetooth
 
 1. Clone este repositório para o seu ambiente de desenvolvimento local.
 
-    git clone https://github.com/bielindoo/beacon-scanner.git
+    git clone [git@github.com:bielindo/tccScannerBeacon.git](https://github.com/bielindo/tccScannerBeacon.git)
+   
     cd beacon-scanner
 
 
 
-1. Certifique-se de ter a biblioteca ArduinoBLE instalada. Se você ainda não a tiver, pode instalá-la usando o Library Manager do Arduino IDE.
+1. Certifique-se de ter a biblioteca ArduinoBLE instalada. Se você ainda não a tiver, pode instalá-la usando o Library Manager do Arduino IDE ou, se estiver usando a plataforma PlatformIO, as bibliotecas são gerenciadas automaticamente.
 
-2. CErtifique - se que o seu dispositivo ESP32 possua um módulo BLE.
+2. Certifique - se que o seu dispositivo ESP32 possua um módulo BLE.
 
 3. Abra o projeto usando a PlatformIO.
 
@@ -26,7 +27,7 @@ O aplicativo Beacon Scanner escaneará os dispositivos BLE próximos e coletará
 
 Para usar o aplicativo, siga os passos abaixo:
 
-1. Conecte o dispositivo Arduino com módulo BLE e inicie o programa.
+1. Conecte o dispositivo ESP32 com módulo BLE e inicie o programa.
 
 2. O aplicativo começará a escanear beacons próximos e exibirá os dispositivos encontrados na saída Serial.
 
