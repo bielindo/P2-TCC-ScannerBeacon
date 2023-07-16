@@ -22,7 +22,6 @@ Este é um aplicativo para escanear e coletar informações de beacons Bluetooth
 
 ## Como Usar
 
-```markdown
 O aplicativo Beacon Scanner escaneará os dispositivos BLE próximos e coletará suas frequências RSSI. Ele calculará as médias das frequências RSSI dos dispositivos encontrados e enviará os resultados através do protocolo MQTT para um servidor.
 
 Para usar o aplicativo, siga os passos abaixo:
