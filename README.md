@@ -1,6 +1,6 @@
 # P2 - Projeto TCC - Beacon Scanner
 
-Este é o repositório do projeto de Trabalho de Conclusão de Curso (TCC) intitulado "Scanner Beacon". O objetivo deste projeto é escanear e coletar informações de beacons Bluetooth Low Energy (BLE) próximos usando o módulo BLE do ESP32.
+Este é o segundo repositório do projeto de Trabalho de Conclusão de Curso (TCC) sobre localização indoor, intitulado "Scanner Beacon". O objetivo deste projeto é escanear e coletar informações de beacons Bluetooth Low Energy (BLE) próximos usando o módulo BLE do ESP32.
 
 ## Instalação
 
@@ -12,13 +12,13 @@ Este é o repositório do projeto de Trabalho de Conclusão de Curso (TCC) intit
 
 
 
-1. Certifique-se de ter a biblioteca ArduinoBLE instalada. Se você ainda não a tiver, pode instalá-la usando o Library Manager do Arduino IDE ou, se estiver usando a plataforma PlatformIO, as bibliotecas são gerenciadas automaticamente.
+2. Certifique-se de ter a biblioteca ArduinoBLE instalada. Se você ainda não a tiver, pode instalá-la usando o Library Manager do Arduino IDE ou, se estiver usando a plataforma PlatformIO, as bibliotecas são gerenciadas automaticamente.
 
-2. Certifique - se que o seu dispositivo ESP32 possua um módulo BLE.
+3. Certifique - se que o seu dispositivo ESP32 possua um módulo BLE.
 
-3. Abra o arquivo beacon-scanner.ino usando a Arduino IDE ou a plataforma PlatformIO.
+4. Abra o arquivo beacon-scanner.ino usando a Arduino IDE ou a plataforma PlatformIO.
 
-4. Carregue o código no seu dispositivo ESP32.
+5. Carregue o código no seu dispositivo ESP32.
 
 
 ## Como Usar
