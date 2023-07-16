@@ -16,7 +16,7 @@ Este é um aplicativo para escanear e coletar informações de beacons Bluetooth
 
 2. Certifique - se que o seu dispositivo ESP32 possua um módulo BLE.
 
-3. Abra o projeto usando a PlatformIO.
+3. Abra o arquivo beacon-scanner.ino usando a Arduino IDE ou a plataforma PlatformIO.
 
 4. Carregue o código no seu dispositivo ESP32.
 
