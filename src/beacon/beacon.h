@@ -18,7 +18,7 @@ public:
     BLEScan *pBLEScan; // Ponteiro para o objeto de escaneamento BLE
 
     // Função para calcular e imprimir as médias das frequências RSSI dos dispositivos encontrados
-    void calculateAndPrintAverages();
+    void calcularMedia();
 
     // Função para iniciar o escaneamento de beacons BLE
     void scanForBeacons();    
