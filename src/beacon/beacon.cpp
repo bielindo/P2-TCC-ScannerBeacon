@@ -21,13 +21,13 @@ class MyAdvertisedDeviceCallbacks : public BLEAdvertisedDeviceCallbacks {
       // Obtém a frequência RSSI do dispositivo
       int rssi = advertisedDevice.getRSSI();
 
-      // Armazena a frequência RSSI no vetor do dispositivo correspondente
+      // Armazena a potência de sinal no vetor do dispositivo correspondente
       devices[deviceName].push_back(rssi);
     }
   }
 };
 
-// Função para escanear e coletar as frequências RSSI dos dispositivos próximos (beacons)
+// Função para escanear e coletar as potências de sinais dos dispositivos próximos (beacons)
 void Beacon::scanForBeacons() {
     // Inicializa o módulo BLE com o nome do servidor fornecido
     BLEDevice::init(nome_servidor);
@@ -53,32 +53,32 @@ void Beacon::scanForBeacons() {
     // Conecta-se à rede Wi-Fi usando MQTT
     mqtt.wifiConnect();
 
-    // Calcula e imprime as médias das frequências RSSI dos dispositivos encontrados
+    // Calcula e imprime as médias das potências de sinais dos dispositivos encontrados
     calcularMedia();
 
     // Limpa o mapa de dispositivos para a próxima execução
     devices.clear();
 }
 
-// Função para calcular as médias das frequências RSSI dos dispositivos encontrados
+// Função para calcular as médias das potências de sinais dos dispositivos encontrados
 void Beacon::calcularMedia() {
-  // Mapa para armazenar as médias calculadas das frequências RSSI
+  // Mapa para armazenar as médias calculadas das potências de sinais
   std::map<std::string, float> medias;
   String mensagem;
 
   // Itera sobre o mapa de dispositivos encontrados
   for (const auto& dispositivo : dispositivos) {
     std::string nome = dispositivo.first;
-    const std::vector<int>& frequencias = dispositivo.second;
+    const std::vector<int>& potecias = dispositivo.second;
 
     int sum = 0;
-    // Calcula a soma das frequências RSSI do dispositivo atual
-    for (int frequencia : frequencias) {
-      sum += frequencia;
+    // Calcula a soma das potencia de sinal do dispositivo atual
+    for (int potencia : potencias) {
+      sum += potencia;
     }
 
-    // Calcula a média das frequências RSSI do dispositivo atual
-    float media = static_cast<float>(sum) / frequencias.size();
+    // Calcula a média das potências de sinais do dispositivo atual
+    float media = static_cast<float>(sum) / potencias.size();
     medias[nome] = media;
 
     // Constrói a mensagem a ser enviada via MQTT
