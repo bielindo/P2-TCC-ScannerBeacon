@@ -23,11 +23,6 @@ class MyAdvertisedDeviceCallbacks : public BLEAdvertisedDeviceCallbacks {
 
       // Armazena a frequência RSSI no vetor do dispositivo correspondente
       devices[deviceName].push_back(rssi);
-
-      Serial.print("Device found: ");
-      Serial.print(deviceName.c_str());
-      Serial.print(" | RSSI: ");
-      Serial.println(rssi);
     }
   }
 };
@@ -59,49 +54,35 @@ void Beacon::scanForBeacons() {
     mqtt.wifiConnect();
 
     // Calcula e imprime as médias das frequências RSSI dos dispositivos encontrados
-    calculateAndPrintAverages();
+    calcularMedia();
 
     // Limpa o mapa de dispositivos para a próxima execução
     devices.clear();
 }
 
-// Função para calcular e imprimir as médias das frequências RSSI dos dispositivos encontrados
-void Beacon::calculateAndPrintAverages() {
+// Função para calcular as médias das frequências RSSI dos dispositivos encontrados
+void Beacon::calcularMedia() {
   // Mapa para armazenar as médias calculadas das frequências RSSI
-  std::map<std::string, float> averages;
+  std::map<std::string, float> medias;
   String mensagem;
 
   // Itera sobre o mapa de dispositivos encontrados
-  for (const auto& device : devices) {
-    std::string deviceName = device.first;
-    const std::vector<int>& frequencies = device.second;
+  for (const auto& dispositivo : dispositivos) {
+    std::string nome = dispositivo.first;
+    const std::vector<int>& frequencias = dispositivo.second;
 
     int sum = 0;
     // Calcula a soma das frequências RSSI do dispositivo atual
-    for (int frequency : frequencies) {
-      sum += frequency;
+    for (int frequencia : frequencias) {
+      sum += frequencia;
     }
 
     // Calcula a média das frequências RSSI do dispositivo atual
-    float average = static_cast<float>(sum) / frequencies.size();
-    averages[deviceName] = average;
-
-    // Imprime as informações do dispositivo e sua média RSSI
-    Serial.print("Device: ");
-    Serial.print(deviceName.c_str());
-    Serial.print(" | Average RSSI: ");
-    Serial.println(average);
+    float media = static_cast<float>(sum) / frequencias.size();
+    medias[nome] = media;
 
     // Constrói a mensagem a ser enviada via MQTT
-    mensagem += String(deviceName.c_str()) + ", " + String(average) + "; ";
-
-    // Imprime as frequências RSSI individuais do dispositivo
-    Serial.print("Frequencies: ");
-    for (int frequency : frequencies) {
-      Serial.print(frequency);
-      Serial.print(" ");
-    }
-    Serial.println();
+    mensagem += String(nome.c_str()) + ", " + String(media) + "; ";
   }
 
   // Imprime a mensagem a ser enviada via MQTT
